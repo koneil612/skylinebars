@@ -38,7 +38,6 @@ export default class TodoApp extends React.Component {
       <div>
         <Navigation />
         <h3>Locations!!!!!</h3>
-        <p>hgfds</p>
         <TodoList />
         <button onClick={this.readUser.bind(this)}>Log In</button>
         <button onClick={this.loadTodos.bind(this)}>Search Locations</button>
