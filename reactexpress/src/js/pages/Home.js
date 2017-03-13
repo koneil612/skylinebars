@@ -1,6 +1,6 @@
 import React from 'react';
 export default React.createClass({
   render() {
-    return <div>hhhhhOME</div>
+    return <div>HOME Page Junk</div>
   }
 })

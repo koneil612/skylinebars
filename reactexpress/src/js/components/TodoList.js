@@ -8,14 +8,22 @@ import { connect } from "react-redux";
     }
 })
 export default class TodoList extends React.Component {
-  render() {
-    return (
-      <ul>
-        {this.props.todos.map(item => (
-          <li key={item.id}>{item.response.venue.name}</li>
-        ))}
-      </ul>
-    );
-    console.log(item.response);
-  }
+ render() {
+     console.log("checking ",this.props.todos );
+     if(typeof this.props.todos.response !== "undefined" && typeof this.props.todos.response.venues !== "undefined"){
+         var venue = this.props.todos.response.venues;
+         return (
+           <ul>
+               <li key={venue.id}>{venue.name}</li>
+           </ul>
+         );
+     } else {
+         return (
+           <ul>
+           </ul>
+         );
+     }
+
+   console.log(item.response);
+ }
 }

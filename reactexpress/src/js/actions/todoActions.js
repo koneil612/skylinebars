@@ -10,7 +10,7 @@ import axios from "axios";
 export function readAll(){
     console.log("reading todos");
     return function(dispatch) {
-    axios.get("https://api.foursquare.com/v2/venues/40a55d80f964a52020f31ee3?oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313")
+    axios.get("https://api.foursquare.com/v2/venues/search?near=Pearland,TX&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313")
       .then((response) => {
         dispatch({type: "TODO_READ", payload: response.data})
       })
