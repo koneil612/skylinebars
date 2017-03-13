@@ -32,17 +32,15 @@ export default class TodoApp extends React.Component {
   }
 
   render() {
-    //   console.log(this.props);
-    //   const todos = this.props.todos.map(todo => <li>{todo.text}</li>);
     return (
       <div>
         <Navigation />
-        <h3>Locations!!!!!</h3>
-        <TodoList />
         <button onClick={this.readUser.bind(this)}>Log In</button>
+        <TodoList />
+        {this.props.children}
         <button onClick={this.loadTodos.bind(this)}>Search Locations</button>
         {/* add this */}
-        {this.props.children}
+
       </div>
     );
   }
