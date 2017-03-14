@@ -7,6 +7,9 @@ import { connect } from "react-redux";
         todos:store.todos.todos
     }
 })
+
+
+
 export default class TodoList extends React.Component {
  render() {
      console.log("checking ",this.props.todos );
