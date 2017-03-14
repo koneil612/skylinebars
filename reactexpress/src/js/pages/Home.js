@@ -1,9 +1,32 @@
 import React from 'react';
-export default React.createClass({
-  render() {
-    return <div>
-    <h1>Enter Your Location:</h1>
-    <p><input id="location" className="input" name="name" type="text" value="" placeholder="Houston, TX" size="30" /></p>
-    </div>
+
+export default CityName extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
-})
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  handleSubmit(event) {
+    alert('City: ' + this.state.value);
+    event.preventDefault();
+  }
+
+  render() {
+    return (
+      <form onSubmit={this.handleSubmit}>
+        <label>
+          City Name:
+          <input type="text" placeholder=" Houston, TX" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Search" />
+      </form>
+    );
+  }
+}
