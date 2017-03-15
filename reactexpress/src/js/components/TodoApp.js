@@ -44,13 +44,15 @@ export default class TodoApp extends React.Component {
     }
 
   doSearch(search,event){
+      console.log("search is ", search);
       this.setState({
           search:search,
       });
 
-      axios.get('https://api.foursquare.com/v2/venues/search?near=' +${search}+ '&query=bar+rooftop&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313.json')
+      axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=bar+rooftop&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
-          const posts = res.data.data.children.map(obj => obj.data);
+        console.log(res);
+          const posts = res.data.response.venues.map(obj => obj.name);
 
           this.setState({
               posts:posts

@@ -12,7 +12,7 @@ import { connect } from "react-redux";
 
 export default class TodoList extends React.Component {
  render() {
-     console.log("checking ",this.props.todos );
+     console.log("checking ",this.props.posts );
      if(typeof this.props.todos.response !== "undefined" && typeof this.props.todos.response.venues !== "undefined"){
         var venues = this.props.todos.response.venues;
         var liData = venues.map(venue =><li>{venue.name}</li>);
