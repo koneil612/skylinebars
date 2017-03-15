@@ -6,9 +6,10 @@ export default class CityName extends React.Component {
     this.state = {
         value: '',
     };
+    
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
+    this.searchLocation = this.searchLocation.bind(this);
   }
 
   handleChange(event) {
@@ -35,7 +36,7 @@ export default class CityName extends React.Component {
           City Name:
           <input type="text" placeholder=" Houston, TX" value={this.state.value} onChange={this.handleChange.bind(this)} />
         </label>
-    
+
 
       </form>
     );

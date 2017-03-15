@@ -1,16 +1,10 @@
 import axios from "axios";
-//returns from function will be info that is dispatched
-//import in target file with
-//import * as user from "/path/to/actions/userAction.js";
-//call user.readUser
-// OR
-//import { readUser } from "/path/to/actions/userAction.js";
-//call setUserName('Janice');
+
 
 export function readAll(){
-    console.log("reading todos");
+    console.log("searching foursquare");
     return function(dispatch) {
-    axios.get("https://api.foursquare.com/v2/venues/search?near=Houston, TX&query=bar+rooftop&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313")
+    axios.get("https://api.foursquare.com/v2/venues/search?near=${search}&query=bar+rooftop&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313")
       .then((response) => {
         dispatch({type: "TODO_READ", payload: response.data})
       })
@@ -20,9 +14,9 @@ export function readAll(){
   }
 }
 
-export function create(text){
-    return {
-        type:"TODO_CREATE",
-        payload:text
-    }
-}
+// export function create(text){
+//     return {
+//         type:"TODO_CREATE",
+//         payload:text
+//     }
+// }
