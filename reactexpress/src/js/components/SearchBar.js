@@ -15,7 +15,7 @@ export default class SearchBar extends React.Component {
   }
 
   handleSubmit(event) {
-    console.log('search' + this.state.value);
+    // console.log('search' + this.state.value);
     event.preventDefault();
   }
 
