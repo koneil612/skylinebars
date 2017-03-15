@@ -9,7 +9,7 @@ import Navigation from "./Navigation";
 import styled from 'styled-components';
 import axios from 'axios';
 
-const StyledText = styled.ul`
+const StyledText = styled.li`
   font-size: 1em;
   text-align: center;
   color: palevioletred;
