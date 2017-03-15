@@ -24,7 +24,7 @@ class Clicking extends React.Component {
             <div>
             <img src={this.props.post.url} onClick={this.handleClick} />
 
-            {this.props.post};
+            {this.props.post.name};
             </div>
         );
     }
