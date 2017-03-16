@@ -15,9 +15,6 @@ body {
     color: tomato;
     background: black;
 }
-#wrapper {
-    text-align: center;
-}
 
 #map {
   height: 400px;
@@ -35,7 +32,6 @@ body {
 
 
 </head>
-
 <body>
 
     <div class = "header">
@@ -44,12 +40,11 @@ body {
         <button onclick="getLocation()">Use My Location</button>
         <br/><br/>
         <p id="demo"></p>
-
-<div id="wrapper">
+<center>
     <div id="map"></div>
 
-</div>
-        <!-- <div id="app"></div> -->
+</center>
+        <div id="app"></div>
 
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
@@ -74,8 +69,8 @@ function getLocation() {
 }
 
 function showPosition(position) {
-	var lat = position.coords.latitude
-  var long = position.coords.longitude
+    var lat = position.coords.latitude
+    var long = position.coords.longitude
     x.innerHTML = "Latitude: " + lat +
     "<br>Longitude: " + long;
 
