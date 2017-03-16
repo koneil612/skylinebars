@@ -1,13 +1,13 @@
 import React from 'react';
 import { Link } from "react-router";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 
-
-const Header = styled.section`
-    font-size: 5em;
-    text-align: center;
-    font-family: "Gist"
-`;
+//
+// const Header = styled.section`
+//     font-size: 5em;
+//     text-align: center;
+//     font-family: "Gist"
+// `;
 
 export default React.createClass({
   render() {

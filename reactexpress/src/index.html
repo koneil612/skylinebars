@@ -6,23 +6,55 @@
     <title>SkyLine Bars</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+<style>
+body {
+    width: 100%;
+    height: 100%;
+    padding-top: 4em;
+    text-align: center;
+    color: tomato;
+    background: black;
+}
+#wrapper {
+    text-align: center;
+}
+
+#map {
+  height: 400px;
+  width: 50%;
+ }
+
+ .header {
+     font-size: 5em;
+     text-align: center;
+     /*padding-top: 4em;*/
+     font-family: "Gist";
+ }
+
+ </style>
+
 
 </head>
 
 <body>
 
+    <div class = "header">
+      SkyLine Bars
+    </div>
         <button onclick="getLocation()">Use My Location</button>
         <br/><br/>
         <p id="demo"></p>
 
+<div id="wrapper">
+    <div id="map"></div>
 
-        <div id="map"></div>
+</div>
         <!-- <div id="app"></div> -->
 
-        <script src="client.min.js"></script>
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
         </script>
+        <!-- <script src="client.min.js"></script> -->
 </body>
 
 <script type="text/javascript">
