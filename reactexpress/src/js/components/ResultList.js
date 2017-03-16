@@ -32,7 +32,7 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        console.log("what " + this.postVenue)
+        console.log("what " + this.props.list)
 
     return (
           <ul>

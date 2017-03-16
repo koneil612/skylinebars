@@ -9,20 +9,21 @@ import Navigation from "./Navigation";
 import styled from 'styled-components';
 import axios from 'axios';
 
-const StyledText = styled.li`
-  font-size: 1em;
+const Lists = styled.ul`
+  font-size: 2.5em;
+  font-family: "Sunn"
   text-align: center;
-  color: palevioletred;
+  color: papayawhip;
   list-style-type: none;
 `;
 
-const Wrapper = styled.section`
-    height: 100%;
+const Wrapper = styled.div`
     width: 100%;
-    padding: 4em;
+    height: 100%;
+    padding-top: 4em;
     text-align: center;
     color: tomato;
-    background: papayawhip;
+    background: black;
 `;
 
 
@@ -60,43 +61,32 @@ export default class TodoApp extends React.Component {
         });
   }
 
-  // handleSubmit(e){
-  //     e.preventDefault();
-  // }
 
-  // readUser(){
-  //     this.props.dispatch(user.readUser());
-  //   //   this.props.dispatch(todo.readAll(channel));
-  // }
-
-  // loadTodos(){
-  //     this.props.dispatch(todo.readAll());
-  // }
 
   render() {
       var displayShowResults = false;
       let list = <li>{}</li>;
     return (
-      <div>
-      <Wrapper>
+    <Wrapper>
+      <Navigation />
       <div id="SearchBar">
           <SearchBar doSearch={this.doSearch} />
-          <h1>{this.state.search}</h1>
+
       </div>
-     <StyledText> <div id="list">
+      <Lists>
+      <div id="list">
           <ResultList list={this.state.posts} />
       </div>
-      </StyledText>
+    </Lists>
       </Wrapper>
-      </div>
 
     );
   }
 }
 
+//<h1>{this.state.search}</h1>
 //
 //
-// <Navigation />
 // {/* <button onClick={this.readUser.bind(this)}>Log In</button>
 // <StyledText><TodoList /></StyledText>
 // {this.props.children}

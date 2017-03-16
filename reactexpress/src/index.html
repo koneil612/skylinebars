@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <title>SkyLine Bars</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" type="text/css" rel="stylesheet" />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
+</head>
+
+<body>
+
+        <button onclick="getLocation()">Use My Location</button>
+        <br/><br/>
+        <p id="demo"></p>
+
+
+        <div id="map"></div>
+        <!-- <div id="app"></div> -->
+
+        <script src="client.min.js"></script>
+        <script async defer
+        src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCkUOdZ5y7hMm0yrcCQoCvLwzdM6M8s5qk&callback=initMap">
+        </script>
+</body>
+
+<script type="text/javascript">
+    $("document").ready(function() {
+        console.log("ready!");
+    });
+
+
+    var x = document.getElementById("demo");
+
+function getLocation() {
+    if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showPosition);
+    } else {
+        x.innerHTML = "Geolocation is not supported by this browser.";
+    }
+}
+
+function showPosition(position) {
+	var lat = position.coords.latitude
+  var long = position.coords.longitude
+    x.innerHTML = "Latitude: " + lat +
+    "<br>Longitude: " + long;
+
+}
+
+function initMap() {
+  var uluru = {lat: 42.3641128, lng: -71.024817};
+  var map = new google.maps.Map(document.getElementById('map'), {
+    zoom: 4,
+    center: uluru
+  });
+  var marker = new google.maps.Marker({
+    position: uluru,
+    map: map
+  });
+}
+</script>
+</html>
