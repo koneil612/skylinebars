@@ -7,7 +7,6 @@ export default class CityName extends React.Component {
         value: '',
     };
     
-
     this.handleChange = this.handleChange.bind(this);
     this.searchLocation = this.searchLocation.bind(this);
   }
