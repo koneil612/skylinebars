@@ -54,7 +54,7 @@ export default class TodoApp extends React.Component {
 
       axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
-        // console.log(res);
+        console.log(res);
           const posts = res.data.response.venues;
 
           this.setState({
