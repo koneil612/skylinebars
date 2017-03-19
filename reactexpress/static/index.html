@@ -8,28 +8,34 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
 <style>
 body {
-    width: 100%;
-    height: 100%;
-    padding-top: 4em;
-    text-align: center;
-    color: tomato;
-    background: black;
-}
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        color: tomato;
+        background: black;
+        font-family: "Sunn";
+        font-size: 2.5em;
+    }
 
-ul {
-    list-style: none;
-}
+    #header {
+        width: 100%;
+        height: 100%;
+        font-size: 2em;
+        text-align: center;
+        font-family: "Gist"
+    }
 
-#map {
-  height: 400px;
-  width: 50%;
- }
+    ul {
+        list-style: none;
+    }
 
-
-
+    #map {
+      height: 400px;
+      width: 80%;
+     }
  </style>
+
 </head>
-<body>
 
     <div id="app"></div>
 
@@ -40,49 +46,52 @@ ul {
         <script async defer
         src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOvCtHvQNlUnFWqKrxwiVKqFVA8t5iVHQ&callback=initMap&libraries=places">
         </script>
+
+
         <script src="client.min.js"></script>
 </body>
 
 <script type="text/javascript">
     $("document").ready(function() {
-        console.log("ready!");
+        console.log("ready?!");
     });
 
 
-function initMap() {
-  window.map = new google.maps.Map(document.getElementById('map'), {
-    center: {lat: -34.397, lng: 150.644},
-    zoom: 9
-  });
-  //var infoWindow = new google.maps.InfoWindow({map: window.map});
-
-  // Try HTML5 geolocation.
-  if (navigator.geolocation) {
-    navigator.geolocation.getCurrentPosition(function(position) {
-      var pos = {
-        lat: position.coords.latitude,
-        lng: position.coords.longitude
-      };
-
-      //infoWindow.setPosition(pos);
-      //infoWindow.setContent('Location found.');
-      map.setCenter(pos);
+    function initMap() {
+      window.map = new google.maps.Map(document.getElementById('map'), {
+        center: {lat: -34.397, lng: 150.644},
+        zoom: 10
+      });
 
 
-    }, function() {
-      handleLocationError(true, infoWindow, window.map.getCenter());
-    });
-  } else {
-    // Browser doesn't support Geolocation
-    handleLocationError(false, infoWindow, window.map.getCenter());
-  }
-}
+      // Try HTML5 geolocation.
+      if (navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(function(position) {
+          var pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude
+          };
 
-function handleLocationError(browserHasGeolocation, infoWindow, pos) {
-  infoWindow.setPosition(pos);
-  infoWindow.setContent(browserHasGeolocation ?
-                        'Error: The Geolocation service failed.' :
-                        'Error: Your browser doesn\'t support geolocation.');
-}
+          //infoWindow.setContent('Location found.');
+          map.setCenter(pos);
+
+
+        }, function() {
+          handleLocationError(true, infoWindow, window.map.getCenter());
+        });
+      } else {
+        // Browser doesn't support Geolocation
+        handleLocationError(false, infoWindow, window.map.getCenter());
+      }
+    }
+
+    function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+      window.map.setPosition(pos);
+      infoWindow.setContent(browserHasGeolocation ?
+                            'Error: The Geolocation service failed.' :
+                            'Error: Your browser doesn\'t support geolocation.');
+    }
+
+
 </script>
 </html>

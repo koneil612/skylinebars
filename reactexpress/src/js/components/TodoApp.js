@@ -22,7 +22,6 @@ const Lists = styled.ul`
 const Wrapper = styled.div`
     width: 100%;
     height: 100%;
-    padding-top: 4em;
     text-align: center;
     color: tomato;
     background: black;
@@ -36,6 +35,9 @@ const Wrapper = styled.div`
         todos:store.todos.todos
     }
 })
+
+
+
 export default class TodoApp extends React.Component {
     constructor(){
         super();
@@ -51,40 +53,30 @@ export default class TodoApp extends React.Component {
       this.setState({
           search:search,
       });
-      function setMapOnAll(map) {
-        for (var i = 0; i < markers.length; i++) {
-          markers[i].setMap(map);
-        }
-      }
 
-      function deleteMarkers() {
-          clearMarkers();
-          markers = [];
-        }
-        
+// this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
       axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
-        console.log(res);
+        // console.log(res);
           const venues = res.data.response.venues;
           venues.map(function(item){
-              console.log(item);
+            //   console.log(item);
               //response.data.response.venues.map
-              //add markers with :
-
-              var l = new google.maps.LatLng(item.location.lat, item.location.lng);
+              //adding markers onto the map with :
+              var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
               new google.maps.Marker({
-                  position: l,
+                  position: markerLocation,
                   title:item.name,
-                  map: window.map
+                //   markers.push(markerLocation);
               });
-
-
           });
           this.setState({
               posts:venues
           })
         });
+        console.log("markers: " + markers);
   }
+
 
 
 
@@ -96,7 +88,6 @@ export default class TodoApp extends React.Component {
       <Navigation />
       <div id="SearchBar">
           <SearchBar doSearch={this.doSearch} />
-
       </div>
       <Lists>
       <div id="list">
@@ -108,13 +99,3 @@ export default class TodoApp extends React.Component {
     );
   }
 }
-
-//<h1>{this.state.search}</h1>
-//
-//
-// {/* <button onClick={this.readUser.bind(this)}>Log In</button>
-// <StyledText><TodoList /></StyledText>
-// {this.props.children}
-// <button onClick={this.loadTodos.bind(this)}>Search Locations</button> */}
-// {/* add this */}
-//

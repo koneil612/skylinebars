@@ -4,7 +4,8 @@ import styled from 'styled-components';
 
 
 const Header = styled.section`
-    font-size: 5em;
+    padding-top: 1em;
+    font-size: 3em;
     text-align: center;
     font-family: "Gist"
 `;
