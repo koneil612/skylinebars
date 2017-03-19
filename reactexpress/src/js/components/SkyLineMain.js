@@ -12,7 +12,7 @@ import axios from 'axios';
 
 
 const Lists = styled.ul`
-  font-size: 2.5em;
+  font-size: 1.5em;
   font-family: "Sunn"
   text-align: center;
   color: papayawhip;
@@ -36,9 +36,7 @@ const Wrapper = styled.div`
     }
 })
 
-
-
-export default class TodoApp extends React.Component {
+export default class SkyLineMain extends React.Component {
     constructor(){
         super();
         this.state = {
@@ -54,7 +52,7 @@ export default class TodoApp extends React.Component {
           search:search,
       });
 
-// this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
+      // this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
       axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
         // console.log(res);
@@ -67,14 +65,13 @@ export default class TodoApp extends React.Component {
               new google.maps.Marker({
                   position: markerLocation,
                   title:item.name,
-                //   markers.push(markerLocation);
+                  map: window.map
               });
           });
           this.setState({
               posts:venues
           })
         });
-        console.log("markers: " + markers);
   }
 
 

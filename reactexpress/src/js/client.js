@@ -1,6 +1,6 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TodoApp from "./components/TodoApp";
+import SkyLineMain from "./components/SkyLineMain";
 import { Provider } from "react-redux";
 import store from "./store";
 import { Router, Route, hashHistory,IndexRoute } from 'react-router';
@@ -12,7 +12,7 @@ const app = document.getElementById('app');
 ReactDOM.render((
     <Provider store={store}>
         <Router history={hashHistory}>
-        <Route path="/" component={TodoApp}>
+        <Route path="/" component={SkyLineMain}>
             {/* add it here, as a child of `/` */}
             <IndexRoute component={Home}/>
             {/* make them children of `App` */}
