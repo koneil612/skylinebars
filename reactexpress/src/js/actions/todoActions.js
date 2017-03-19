@@ -6,6 +6,10 @@ export function readAll(){
     return function(dispatch) {
     axios.get("https://api.foursquare.com/v2/venues/search?near=${search}&query=bar+rooftop&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313")
       .then((response) => {
+          
+        response.data.reponse.venues.map(function(item){
+            console.log(item);
+        }));
         dispatch({type: "TODO_READ", payload: response.data})
       })
       .catch((err) => {

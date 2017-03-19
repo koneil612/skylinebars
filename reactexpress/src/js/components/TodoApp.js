@@ -16,7 +16,7 @@ const Lists = styled.ul`
   font-family: "Sunn"
   text-align: center;
   color: papayawhip;
-  list-style-type: none;
+  list-style: none;
 `;
 
 const Wrapper = styled.div`
@@ -51,14 +51,37 @@ export default class TodoApp extends React.Component {
       this.setState({
           search:search,
       });
+      function setMapOnAll(map) {
+        for (var i = 0; i < markers.length; i++) {
+          markers[i].setMap(map);
+        }
+      }
 
+      function deleteMarkers() {
+          clearMarkers();
+          markers = [];
+        }
+        
       axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
         console.log(res);
-          const posts = res.data.response.venues;
+          const venues = res.data.response.venues;
+          venues.map(function(item){
+              console.log(item);
+              //response.data.response.venues.map
+              //add markers with :
 
+              var l = new google.maps.LatLng(item.location.lat, item.location.lng);
+              new google.maps.Marker({
+                  position: l,
+                  title:item.name,
+                  map: window.map
+              });
+
+
+          });
           this.setState({
-              posts:posts
+              posts:venues
           })
         });
   }
