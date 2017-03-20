@@ -9,22 +9,22 @@ class Clicking extends React.Component {
     }
 
     postVenue() {
-            return <div>this.props.list.name</div>;
+            return
+            <p> {this.props.placeAddress} what have you </p>;
     }
 
     handleClick(e) {
-       const clickPhoto = this.props.post.name;
-            return this.postVenue,
-            console.log(this.props.post.name);
+        event.preventDefault();
+        const clickName = this.props.post.name;
+            return this.postVenue
 
     }
 
     render() {
         return (
             <div>
-            <img src={this.props.post.photos} onClick={this.handleClick} />
-
-            {this.props.post.name}
+            <p onClick={this.handleClick}>
+            {this.props.post.name}</p><p>{this.props.placeAddress} </p>
             </div>
         );
     }
@@ -32,14 +32,12 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        console.log("what " + this.props.list)
+        // console.log("what " + this.postVenue)
 
     return (
           <ul>
           {this.props.list.map(post =>
-              <li key={post.id}>
-              <Clicking post={post} title={this.postVenue} />
-              </li>
+              <li key={post.id}><Clicking post={post} title={this.postVenue} /></li>
              )}
           </ul>
         )

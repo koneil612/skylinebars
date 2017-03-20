@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import axios from 'axios';
 
 
+
 const Lists = styled.ul`
   font-size: 1.5em;
   font-family: "Sunn"
@@ -55,26 +56,37 @@ export default class SkyLineMain extends React.Component {
       // this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
       axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
         .then(res => {
-        // console.log(res);
-          const venues = res.data.response.venues;
-          venues.map(function(item){
+        console.log(res);
+        var venues = res.data.response.venues;
+        var venue = res.data.response.venues[0];
+        var placeName = venue.name;
+        var placeAddress = venue.location.formattedAddress;
+        console.log(placeAddress);
+        var placePhone = (venue.contact.formattedPhone === undefined)? 'None': venue.contact.formattedPhone;
+
+         venues.map(function(item){
             //   console.log(item);
+
               //response.data.response.venues.map
               //adding markers onto the map with :
               var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
+
               new google.maps.Marker({
                   position: markerLocation,
                   title:item.name,
                   map: window.map
               });
-          });
+
+
+           });
           this.setState({
-              posts:venues
+              posts:venues,
+              place: placeName,
+              address: placeAddress,
+              phone: placePhone
           })
-        });
-  }
-
-
+          });
+    }
 
 
   render() {
@@ -88,7 +100,8 @@ export default class SkyLineMain extends React.Component {
       </div>
       <Lists>
       <div id="list">
-          <ResultList list={this.state.posts} />
+          <ResultList list={this.state.posts} address={this.state.address} phone={ this.state.phone} />
+
       </div>
     </Lists>
       </Wrapper>

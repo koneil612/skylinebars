@@ -6,8 +6,9 @@
     <title>SkyLine Bars</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" type="text/css" rel="stylesheet" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+
 <style>
-body {
+    body {
         width: 100%;
         height: 100%;
         text-align: center;
@@ -32,6 +33,7 @@ body {
     #map {
       height: 400px;
       width: 80%;
+      border-radius: 20%;
      }
  </style>
 
@@ -56,10 +58,9 @@ body {
         console.log("ready?!?!");
     });
 
-
     function initMap() {
       window.map = new google.maps.Map(document.getElementById('map'), {
-        center: {lat: -34.397, lng: 150.644},
+        center: {lat: 42.3601, lng: -71.0589},
         zoom: 10
       });
 
@@ -91,6 +92,8 @@ body {
                             'Error: The Geolocation service failed.' :
                             'Error: Your browser doesn\'t support geolocation.');
     }
+
+
 
 
 </script>
