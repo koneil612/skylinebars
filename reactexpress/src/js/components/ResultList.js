@@ -14,17 +14,23 @@ class Clicking extends React.Component {
     }
 
     handleClick(e) {
-        event.preventDefault();
-        const clickName = this.props.post.name;
-            return this.postVenue
+
+        // const clickName = this.props.post.name;
+            // return <p>{this.props.post.location.address} </p>
+        console.log("Clicked an li", this);
+
 
     }
 
     render() {
+        console.log("placeAddress " + this);
         return (
             <div>
             <p onClick={this.handleClick}>
-            {this.props.post.name}</p><p>{this.props.placeAddress} </p>
+            {this.props.post.name}</p>
+            <p>{this.props.post.location.address} </p>
+            <p>{this.props.post.url} </p>
+            <img src={this.props.post.categories.icon} /> 
             </div>
         );
     }
@@ -32,12 +38,14 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        // console.log("what " + this.postVenue)
+        // console.log("what " + this.props.address)
 
     return (
           <ul>
           {this.props.list.map(post =>
-              <li key={post.id}><Clicking post={post} title={this.postVenue} /></li>
+              <li key={post.id}><Clicking post={post} title={this.postVenue} />
+
+              </li>
              )}
           </ul>
         )
