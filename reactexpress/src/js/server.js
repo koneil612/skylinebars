@@ -12,11 +12,22 @@ import NotFoundPage from './pages/NotFound';
 // initialize the server and configure support for ejs templates
 const app = new Express();
 const server = new Server(app);
+const express = require('express');
+const bodyParser = require('body-parser');
+const router = express.Router();
+const pg = require('pg' );
+const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/skylinebars';
 app.set('view engine', 'ejs');
 app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
 app.use(Express.static('static'));
+
+
+app.get('/login', (req, res) => {
+    console.log('this is working');
+    return res.send('what have you');
+});
 
 // universal routing and rendering
 app.get('*', (req, res) => {

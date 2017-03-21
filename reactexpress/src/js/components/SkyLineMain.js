@@ -63,6 +63,8 @@ export default class SkyLineMain extends React.Component {
                 venues.map(function(item) {
                     //   console.log(item);
 
+
+
                     //response.data.response.venues.map
                     //adding markers onto the map with :
                     var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
@@ -73,6 +75,7 @@ export default class SkyLineMain extends React.Component {
                         map: window.map,
                         venue: item
                     });
+                    window.map.setCenter(markerLocation);
 
                     // This event expects a click on a marker
                     // When this event is fired the Info Window content is created
@@ -94,9 +97,9 @@ export default class SkyLineMain extends React.Component {
                 });
                 this.setState({
                     posts: venues,
-                    place: placeName,
-                    address: placeAddress,
-                    phone: placePhone
+                    // place: placeName,
+                    // address: placeAddress,
+                    // phone: placePhone
                 })
             });
     }
