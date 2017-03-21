@@ -22,11 +22,11 @@ function LogoutButton(props) {
 }
 
 function UserGreeting(props) {
-    return <h4> Hello {fname} </h4>;
+    return <h4> Hello</h4>;
 }
 
 function GuestGreeting(props) {
-    return <h4> Sign In haljl </h4>;
+    return <h4> Sign In: </h4>;
 }
 
 function Greeting(props) {
@@ -55,7 +55,7 @@ class Header extends React.Component {
 
     handleLoginClick(event) {
         event.preventDefault();
-        console.log("clicked handleLoginClick");
+        // console.log("clicked handleLoginClick");
         this.props.doLogin(this.state.email,this.state.password);
     }
 
@@ -65,7 +65,7 @@ class Header extends React.Component {
 
     handleSignUpClick(event) {
         event.preventDefault();
-        console.log("clicked signup");
+        // console.log("clicked signup");
         this.props.doSignup();
     }
 
@@ -108,9 +108,8 @@ class Header extends React.Component {
   }
 }
 
-
-
-
-
-
 export default Header;
+//   <ul role="nav">
+//   <li><Link to="/about">About</Link></li>
+//   <li><Link to="/profile">Profile</Link></li>
+//   </ul>

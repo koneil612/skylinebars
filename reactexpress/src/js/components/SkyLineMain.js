@@ -1,14 +1,26 @@
 import React from "react";
 import ReactDOM from "react-dom";
-import TodoList from "./TodoList";
+// import TodoList from "./TodoList";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import {connect} from "react-redux";
+// import style from "./static/css"
 // import * as user from "../actions/userActions";
 // import * as todo from "../actions/todoActions";
 import Header from "./Header";
 import styled from 'styled-components';
 import axios from 'axios';
+// import About from "./pages/About";
+// import Profile from "./pages/Profile";
+
+
+
+const Heading = styled.section`
+    padding-top: 1em;
+    font-size: 3em;
+    text-align: center;
+    font-family: "Gist"
+`;
 
 const Lists = styled.ul `
   font-size: 1.5em;
@@ -23,7 +35,7 @@ const Wrapper = styled.div `
     height: 100%;
     text-align: center;
     color: tomato;
-    background: black;
+
 `;
 
 
@@ -57,7 +69,6 @@ export default class SkyLineMain extends React.Component {
         email: email,
         password: password
         })
-
           .then(res => {
             if(res.data.login){
                 console.log("logging in user");
@@ -72,12 +83,10 @@ export default class SkyLineMain extends React.Component {
 
     doSignup(){
         console.log("doSignup");
+        axios.get('/signup');
         // this.setState({page:"signup"});
         // <SignUp />
         }
-
-
-
     doSearch(search, event) {
         //   console.log("search is ", search);
         this.setState({
@@ -91,9 +100,6 @@ export default class SkyLineMain extends React.Component {
                 var venues = res.data.response.venues;
                 venues.map(function(item) {
                     //   console.log(item);
-
-
-
                     //response.data.response.venues.map
                     //adding markers onto the map with :
                     var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
@@ -144,7 +150,9 @@ export default class SkyLineMain extends React.Component {
             <Wrapper>
             <Header isLoggedIn={this.state.isLoggedIn} doLogin={this.doLogin} doLogout={this.doLogout} doSignup={this.doSignup}/>
              <br/> <hr/>
-
+             <div>
+             <Heading>SkyLine Bars</Heading>
+             </div>
             <div id = "SearchBar" >
             <SearchBar doSearch = {this.doSearch}/>
             </div>
@@ -179,17 +187,17 @@ function SignUp() {
         )
 }
 
-//
-// function SignIn(props) {
-//     return(
-//         <div>
-//             <form>
-//              <div id="signin">
-//                 <input placeholder="Email" type="text" id="email"/>
-//                 <input placeholder="Password" type="password" id="password"/>
-//             <button id="send"> Send</button>
-//             </div>
-//             </form>
-//         </div>
-//         )
-// }
+
+function SignIn(props) {
+    return(
+        <div>
+            <form>
+             <div id="signin">
+                <input placeholder="Email" type="text" id="email"/>
+                <input placeholder="Password" type="password" id="password"/>
+            <button id="send"> Send</button>
+            </div>
+            </form>
+        </div>
+        )
+}

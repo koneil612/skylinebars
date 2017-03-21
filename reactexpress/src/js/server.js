@@ -16,37 +16,57 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const router = express.Router();
 const session = require('client-sessions');
-const pg = require('pg' );
-const connectionString = process.env.DATABASE_URL || 'postgres://postgres:@localhost:5432/skylinebars';
 
+var mongoose = require('mongoose');
+mongoose.connect('mongodb://localhost/skylinebars');
+
+const Schema = mongoose.Schema;
+
+// Define the user schema'
+const userSchema = new Schema({
+    fName: { type: String, required: true },
+    email: {type: String, required: true, unique: true },
+    password: { type: String, required: true },
+    });
+
+// Create a User model with defined schema
+const User = mongoose.model("User", userSchema);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'static'));
 
 // define the folder that will be used for static assets
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded());
-app.use(express.static("public"));
+app.use(express.static("static"));
 app.use(session({
     cookieName: 'session',
     secret: 'wooooooooo'
 }));
 
-var client = new pg.Client(connectionString);
-client.connect();
+// var client = new pg.Client(connectionString);
+// client.connect();
 
-app.get('/login', (req, res) => {
-    console.log('this is working');
-    return res.send('profile');
-    // if (req.session.name){
-    //     res.render('profile.js')
-    // } else {
-    //     res.redirect('/')
-    // }
+app.post("/login",function(req,res){
+    var password = req.body.password;
+    User.findOne({email: req.body.email})
+        .then(function (result) {
+            if (result.password == password) {
+                console.log("Login Authenticated");
+                res.send({"login":true});
+            } else  {
+                console.log("Authentication Failed");}
+                res.send({"login":false});
+            });
+        });
+
+app.get("/signup",function(req,res){
+    if (req.session.token) {
+        res.redirect('/account');
+    } else {
+        res.render('../pages/signup', {session: req.session});
+    }
 });
-
-
-
 // universal routing and rendering
 app.get('*', (req, res) => {
   match(
