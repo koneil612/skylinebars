@@ -64,7 +64,7 @@ app.post("/login",function(req,res){
 app.get("/signup",function(req,res){
     if (req.session.token) {
         console.log('signed in');
-        res.redirect('/profile');
+        res.redirect('profile');
     } else {
         res.render('signup', {session: req.session});
     }
@@ -77,11 +77,21 @@ app.post("/signup", function(req, res) {
         password: req.body.password
     });
     new_User.save()
-    return res.render('/profile');
+    return res.render('profile');
 })
 
 
-
+// TO DO search for the user and any changes made you can save
+//     app.post("/update", function(req, res) {
+//     const new_User = update User ({
+//         fName: req.body.fname,
+//         email: req.body.email,
+//         password: req.body.password
+//     });
+//
+//     User.save()
+//     return res.render('profile');
+// })
 
 app.get("/favicon.ico",function(req,res){
     res.send("");
