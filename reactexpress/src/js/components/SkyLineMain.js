@@ -3,16 +3,12 @@ import ReactDOM from "react-dom";
 import TodoList from "./TodoList";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
-import {
-    connect
-} from "react-redux";
+import {connect} from "react-redux";
 // import * as user from "../actions/userActions";
 // import * as todo from "../actions/todoActions";
-import Navigation from "./Navigation";
+import Header from "./Header";
 import styled from 'styled-components';
 import axios from 'axios';
-
-
 
 const Lists = styled.ul `
   font-size: 1.5em;
@@ -44,10 +40,43 @@ export default class SkyLineMain extends React.Component {
         super();
         this.state = {
             search: '',
-            posts: []
+            posts: [],
+            isLoggedIn: false,
+            user: "",
+            pswd: "",
+            page:""
         };
         this.doSearch = this.doSearch.bind(this);
+        this.doLogin = this.doLogin.bind(this);
+        this.doLogout = this.doLogout.bind(this);
+        this.doSignup = this.doSignup.bind(this);
     }
+    doLogin(email,password){
+        console.log("doLogin");
+        axios.post(`/login`, {
+        email: email,
+        password: password
+        })
+
+          .then(res => {
+            if(res.data.login){
+                console.log("logging in user");
+                this.setState({isLoggedIn: true, page:"signin"});
+            }
+          });
+    }
+
+    doLogout(){
+        this.setState({isLoggedIn: false, page:"greeting"});
+    }
+
+    doSignup(){
+        console.log("doSignup");
+        // this.setState({page:"signup"});
+        // <SignUp />
+        }
+
+
 
     doSearch(search, event) {
         //   console.log("search is ", search);
@@ -108,12 +137,18 @@ export default class SkyLineMain extends React.Component {
     render() {
         var displayShowResults = false;
         let list = < li > {} < /li>;
+        let doSignup = null
+        let page = this.state.page;
+        console.log("page is "+page);
         return (
             <Wrapper>
-            <Navigation / >
+            <Header isLoggedIn={this.state.isLoggedIn} doLogin={this.doLogin} doLogout={this.doLogout} doSignup={this.doSignup}/>
+             <br/> <hr/>
+
             <div id = "SearchBar" >
             <SearchBar doSearch = {this.doSearch}/>
             </div>
+
             <Lists>
             <div id = "list">
             <ResultList list = {this.state.posts} address = {this.state.address}
@@ -125,3 +160,36 @@ export default class SkyLineMain extends React.Component {
         );
     }
 }
+
+
+function SignUp() {
+    return(
+        <div>
+            <form>
+             <div class="signup">
+                <p><input placeholder="First Name" type="text" id="fname"/></p>
+                <p><input placeholder="Last Name" type="text" id="lname"/></p>
+                <p><input placeholder="Email" type="text" id="email"/> </p>
+                <p><input placeholder="Password" type="password" id="password"/></p>
+                <p><input placeholder="Confirm Password" type="text" id="confirm"/></p>
+            <button id="send" onClick={this.doSignup}> Sign Up</button>
+            </div>
+            </form>
+        </div>
+        )
+}
+
+//
+// function SignIn(props) {
+//     return(
+//         <div>
+//             <form>
+//              <div id="signin">
+//                 <input placeholder="Email" type="text" id="email"/>
+//                 <input placeholder="Password" type="password" id="password"/>
+//             <button id="send"> Send</button>
+//             </div>
+//             </form>
+//         </div>
+//         )
+// }
