@@ -18,7 +18,7 @@ const router = express.Router();
 const session = require('client-sessions');
 
 var mongoose = require('mongoose');
-mongoose.connect('mongodb://localhost/skylinebars');
+mongoose.connect('mongodb://kristine:starthouston!@ds137730.mlab.com:37730/skylinebars');
 
 const Schema = mongoose.Schema;
 
@@ -33,7 +33,7 @@ const userSchema = new Schema({
 const User = mongoose.model("User", userSchema);
 
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'static'));
+app.set('views', path.join(__dirname, 'views'));
 
 // define the folder that will be used for static assets
 app.use(bodyParser.json());
@@ -54,6 +54,7 @@ app.post("/login",function(req,res){
             if (result.password == password) {
                 console.log("Login Authenticated");
                 res.send({"login":true});
+                res.render('/profile');
             } else  {
                 console.log("Authentication Failed");}
                 res.send({"login":false});
@@ -62,10 +63,28 @@ app.post("/login",function(req,res){
 
 app.get("/signup",function(req,res){
     if (req.session.token) {
-        res.redirect('/account');
+        console.log('signed in');
+        res.redirect('/profile');
     } else {
-        res.render('../pages/signup', {session: req.session});
+        res.render('signup', {session: req.session});
     }
+});
+
+app.post("/signup", function(req, res) {
+    const new_User = new User ({
+        fName: req.body.fname,
+        email: req.body.email,
+        password: req.body.password
+    });
+    new_User.save()
+    return res.render('/profile');
+})
+
+
+
+
+app.get("/favicon.ico",function(req,res){
+    res.send("");
 });
 // universal routing and rendering
 app.get('*', (req, res) => {

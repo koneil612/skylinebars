@@ -1,6 +1,5 @@
 import React from "react";
 import ReactDOM from "react-dom";
-// import TodoList from "./TodoList";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import {connect} from "react-redux";
@@ -10,8 +9,6 @@ import {connect} from "react-redux";
 import Header from "./Header";
 import styled from 'styled-components';
 import axios from 'axios';
-// import About from "./pages/About";
-// import Profile from "./pages/Profile";
 
 
 
@@ -82,8 +79,8 @@ export default class SkyLineMain extends React.Component {
     }
 
     doSignup(){
-        console.log("doSignup");
-        axios.get('/signup');
+        console.log("doingSignup");
+        document.location='signup';
         // this.setState({page:"signup"});
         // <SignUp />
         }
