@@ -11,7 +11,30 @@
   </head>
 
 
-  <body>
+ <body>
+<a id="menu-toggle" class="side">
+    <img src ="/img/hamburger.png" /></a>
+    <nav id="sidebar-wrapper">
+      <ul class="sidebar-nav">
+          <a id="menu-close" href="#" class="toggle"></a>
+          <li>
+              <a href="/" onclick=$("#menu-close").click();>Login</a>
+          </li>
+          <li>
+              <a href="#" onclick=$("#menu-close").click();>Sign Up!</a>
+          </li>
+
+          <li>
+              <a href="/skills#skills" onclick=$("#menu-close").click();>Skills</a>
+          </li>
+          <li>
+              <a href="/portfolio#portfolio" onclick=$("#menu-close").click();>Projects</a>
+          </li>
+          <li>
+              <a href="/contact#contact" onclick=$("#menu-close").click();>Contact</a>
+          </li>
+      </ul>
+</nav>
 
       <div id="app"></div>
 
@@ -31,7 +54,7 @@
                   lat: 42.3601,
                   lng: -71.0589
               },
-              zoom: 10
+              zoom: 9
           });
 
           window.infowindow = new google.maps.InfoWindow();

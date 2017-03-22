@@ -3,37 +3,9 @@ import ReactDOM from "react-dom";
 import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import {connect} from "react-redux";
-// import style from "./static/css"
-// import * as user from "../actions/userActions";
-// import * as todo from "../actions/todoActions";
 import Header from "./Header";
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import axios from 'axios';
-
-//
-//
-// const Heading = styled.section`
-//     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
-//     font-size: 3em;
-//     text-align: center;
-//     font-family: "Gist"
-// `;
-
-// const Lists = styled.ul `
-//   font-size: 1.5em;
-//   font-family: "Sunn"
-//   text-align: center;
-//   color: papayawhip;
-//   list-style: none;
-// `;
-
-// const Wrapper = styled.div `
-//     width: 100%;
-//     height: 100%;
-//     text-align: center;
-//     color: tomato;
-//
-// `;
 
 
 @connect((store) => {
@@ -50,6 +22,7 @@ export default class SkyLineMain extends React.Component {
         this.state = {
             search: '',
             posts: [],
+            details: [],
             isLoggedIn: false,
             user: "",
             pswd: "",
@@ -83,7 +56,8 @@ export default class SkyLineMain extends React.Component {
         document.location='signup';
         // this.setState({page:"signup"});
         // <SignUp />
-        }
+    }
+
     doSearch(search, event) {
         //   console.log("search is ", search);
         this.setState({
@@ -95,9 +69,25 @@ export default class SkyLineMain extends React.Component {
             .then(res => {
                 console.log(res);
                 var venues = res.data.response.venues;
+                // var venueId = res.data.response.venues.id;
+                // var venueIds = [];
+                // venueId = venueIds.push;
+                console.log("should be ind ids: "+ venueIds);
+                var venueIds = [];
+                var venueDetails = [];
+
                 venues.map(function(item) {
-                    //   console.log(item);
-                    //response.data.response.venues.map
+                    // console.log(item);
+                    venueIds.push(item.id);
+
+                    axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
+                        .then(res2 => {
+                            venueDetails.push(res2.data.response.venue);
+                        
+                        })
+
+    // make a count on the venues so when venue deails == venues count then it will be odne
+
                     //adding markers onto the map with :
                     var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
 
@@ -116,20 +106,16 @@ export default class SkyLineMain extends React.Component {
                         var self = this;
                         var placePhone = (self.venue.contact.formattedPhone === undefined) ? 'None' : self.venue.contact.formattedPhone;
                         // console.log("clicked marker", self);
-                        // console.log(this.venue.url);
-
 
                         // sets the on click content with info from the locations::
-                        window.infowindow.setContent('<div id="iw_container"><p><strong>Name: </strong>' + self.title + '</p>' +
-                    '<p><strong>Address: </strong>  ' + self.venue.location.address + '</p>' +
-                    '<p><strong>Phone: </strong>' + placePhone+ '</p></div>');
+                        window.infowindow.setContent('<div id="iw_container"><p><strong>Name: </strong>' + self.title + '</p>' +'<p><strong>Address: </strong>  ' +self.venue.location.address + '</p>'+'<p><strong>Phone: </strong>' + placePhone+ '</p></div>');
                         infowindow.open(map, this);
                     });
 
                 });
                 this.setState({
                     posts: venues,
-                    // place: placeName,
+                    details: venueDetails
                     // address: placeAddress,
                     // phone: placePhone
                 })
@@ -140,9 +126,11 @@ export default class SkyLineMain extends React.Component {
     render() {
         var displayShowResults = false;
         let list = < li > {} < /li>;
+        let venuedeets = <li> {}</li>;
+
         let doSignup = null
-        let page = this.state.page;
-        console.log("page is "+page);
+        // let page = this.state.page;
+        // console.log("page is "+page);
         return (
             <div class="container-fluid main-body">
 
@@ -152,16 +140,20 @@ export default class SkyLineMain extends React.Component {
              <div id="header">SkyLine Bars</div>
              </div>
              <div className="row">
-                 <div className="col-lg-6">
+                 <div className="col-md-12">
                          <div>
                             <SearchBar doSearch = {this.doSearch}/>
-                            <div id="searcharea">
-                            <ResultList list = {this.state.posts} address = {this.state.address} phone = {this.state.phone}/>
-                            </div>
                          </div>
                 </div>
-            <div className="col-lg-6">
+            </div>
+            <div className="row">
+            <div className="col-md-6">
                 <div id="map"></div>
+            </div>
+            <div className="col-md-6">
+                <div id="searcharea">
+                <ResultList list = {this.state.posts} venuedeets = {this.state.details}/>
+                </div>
              </div>
              </div>
 

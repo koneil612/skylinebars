@@ -14,7 +14,6 @@ class Clicking extends React.Component {
     }
 
     handleClick(e) {
-
         // const clickName = this.props.post.name;
             // return <p>{this.props.post.location.address} </p>
         console.log("Clicked an li", this);
@@ -23,18 +22,18 @@ class Clicking extends React.Component {
     }
 
     render() {
-        console.log("placeAddress " + this);
-        console.log("icon: ");
-        var imgUrl = "https://maps.googleapis.com/maps/api/streetview?size=200x200&sensor=false&location="+this.props.post.location.lat+","+this.props.post.location.lng+"&key=AIzaSyCUbiwk8hC0ZlSAW8QSBrlEBO4NnO5l288";
 
-        var icon = <img src={imgUrl} />;
+        // console.log("venue photos " + this.props.details.venue.photos.groups.items.prefix + this.props.details.venue.photos.groups.items.suffix.);
+        // var imgUrl =this.props.detail.photos.groups.items.prefix + this.props.detail.photos.groups.items.suffix;
+        // console.log(imgUrl);
+        // var icon = <img src={imgUrl} />;
         return (
             <div>
             <p onClick={this.handleClick}>
             {this.props.post.name}</p>
             <p>{this.props.post.location.address} </p>
-            {icon}
             <p>{this.props.post.url} </p>
+
             </div>
         );
     }
@@ -42,16 +41,22 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        // console.log("what " + this.props.address)
+        console.log("this is venuedeets " + this.props.detail);
+        console.log("this should be posts: " + this.props.post);
 
     return (
+        <div>
           <ul>
           {this.props.list.map(post =>
               <li key={post.id}><Clicking post={post} title={this.postVenue} />
-
               </li>
              )}
           </ul>
+          {this.props.venuedeets.map(detail =>
+              <li>{detail.bestphoto}
+              </li>
+             )}
+          </div>
         )
   }
 }
