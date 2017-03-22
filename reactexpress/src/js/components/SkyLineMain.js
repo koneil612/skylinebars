@@ -83,7 +83,7 @@ export default class SkyLineMain extends React.Component {
                     axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
                         .then(res2 => {
                             venueDetails.push(res2.data.response.venue);
-                        
+                        // console.log(venueDetails);
                         })
 
     // make a count on the venues so when venue deails == venues count then it will be odne

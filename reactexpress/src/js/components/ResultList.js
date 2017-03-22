@@ -22,7 +22,7 @@ class Clicking extends React.Component {
     }
 
     render() {
-
+        console.log("rendering a list item");
         // console.log("venue photos " + this.props.details.venue.photos.groups.items.prefix + this.props.details.venue.photos.groups.items.suffix.);
         // var imgUrl =this.props.detail.photos.groups.items.prefix + this.props.detail.photos.groups.items.suffix;
         // console.log(imgUrl);
@@ -31,8 +31,6 @@ class Clicking extends React.Component {
             <div>
             <p onClick={this.handleClick}>
             {this.props.post.name}</p>
-            <p>{this.props.post.location.address} </p>
-            <p>{this.props.post.url} </p>
 
             </div>
         );
@@ -41,21 +39,22 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        console.log("this is venuedeets " + this.props.detail);
-        console.log("this should be posts: " + this.props.post);
-
+        console.log("Props");
+        console.log(this.props);
+        console.log("this is venuedeets ");
+        console.log(this.props.venuedeets);
+        console.log('rendering resultlist');
+        var lis = this.props.venuedeets.map(
+            detail=>{
+            <li key={detail.id}>
+              <Clicking post={detail} />
+            </li>});
+        console.log(lis);
     return (
         <div>
-          <ul>
-          {this.props.list.map(post =>
-              <li key={post.id}><Clicking post={post} title={this.postVenue} />
-              </li>
-             )}
-          </ul>
-          {this.props.venuedeets.map(detail =>
-              <li>{detail.bestphoto}
-              </li>
-             )}
+            <ul>
+                {lis}
+            </ul>
           </div>
         )
   }
