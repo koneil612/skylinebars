@@ -10,30 +10,30 @@ import Header from "./Header";
 import styled from 'styled-components';
 import axios from 'axios';
 
+//
+//
+// const Heading = styled.section`
+//     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+//     font-size: 3em;
+//     text-align: center;
+//     font-family: "Gist"
+// `;
 
+// const Lists = styled.ul `
+//   font-size: 1.5em;
+//   font-family: "Sunn"
+//   text-align: center;
+//   color: papayawhip;
+//   list-style: none;
+// `;
 
-const Heading = styled.section`
-    padding-top: 1em;
-    font-size: 3em;
-    text-align: center;
-    font-family: "Gist"
-`;
-
-const Lists = styled.ul `
-  font-size: 1.5em;
-  font-family: "Sunn"
-  text-align: center;
-  color: papayawhip;
-  list-style: none;
-`;
-
-const Wrapper = styled.div `
-    width: 100%;
-    height: 100%;
-    text-align: center;
-    color: tomato;
-
-`;
+// const Wrapper = styled.div `
+//     width: 100%;
+//     height: 100%;
+//     text-align: center;
+//     color: tomato;
+//
+// `;
 
 
 @connect((store) => {
@@ -144,24 +144,28 @@ export default class SkyLineMain extends React.Component {
         let page = this.state.page;
         console.log("page is "+page);
         return (
-            <Wrapper>
+            <div class="container-fluid main-body">
+
             <Header isLoggedIn={this.state.isLoggedIn} doLogin={this.doLogin} doLogout={this.doLogout} doSignup={this.doSignup}/>
              <br/> <hr/>
-             <div>
-             <Heading>SkyLine Bars</Heading>
+             <div class = "mainbod">
+             <div id="header">SkyLine Bars</div>
              </div>
-            <div id = "SearchBar" >
-            <SearchBar doSearch = {this.doSearch}/>
-            </div>
+             <div className="row">
+                 <div className="col-lg-6">
+                         <div>
+                            <SearchBar doSearch = {this.doSearch}/>
+                            <div id="searcharea">
+                            <ResultList list = {this.state.posts} address = {this.state.address} phone = {this.state.phone}/>
+                            </div>
+                         </div>
+                </div>
+            <div className="col-lg-6">
+                <div id="map"></div>
+             </div>
+             </div>
 
-            <Lists>
-            <div id = "list">
-            <ResultList list = {this.state.posts} address = {this.state.address}
-            phone = {this.state.phone}/>
             </div>
-            </Lists>
-            </Wrapper>
-
         );
     }
 }

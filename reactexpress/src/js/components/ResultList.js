@@ -24,13 +24,17 @@ class Clicking extends React.Component {
 
     render() {
         console.log("placeAddress " + this);
+        console.log("icon: ");
+        var imgUrl = "https://maps.googleapis.com/maps/api/streetview?size=200x200&sensor=false&location="+this.props.post.location.lat+","+this.props.post.location.lng+"&key=AIzaSyCUbiwk8hC0ZlSAW8QSBrlEBO4NnO5l288";
+
+        var icon = <img src={imgUrl} />;
         return (
             <div>
             <p onClick={this.handleClick}>
             {this.props.post.name}</p>
             <p>{this.props.post.location.address} </p>
+            {icon}
             <p>{this.props.post.url} </p>
-            <img src={this.props.post.categories.icon} /> 
             </div>
         );
     }
