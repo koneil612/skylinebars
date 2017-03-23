@@ -4,6 +4,7 @@ export default React.createClass({
       console.log("sign up form");
     return
         <form>
+        <h1> is this the sign up form i see?</h1>
          <div class="signup">
             <p><input placeholder="First Name" type="text" id="fname"/></p>
             <p><input placeholder="Email" type="text" id="email"/> </p>

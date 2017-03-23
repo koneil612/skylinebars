@@ -5,6 +5,7 @@ import { Router, Route, hashHistory,IndexRoute } from 'react-router';
 import About from "./pages/About";
 import Home from "./pages/Home";
 import NotFound from "./pages/NotFound";
+import Profile from "./pages/Profile";
 
 const routes = (
         <Router history={hashHistory}>

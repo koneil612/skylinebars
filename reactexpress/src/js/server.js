@@ -18,6 +18,8 @@ const router = express.Router();
 const session = require('client-sessions');
 
 var mongoose = require('mongoose');
+const bluebird = require('bluebird');
+mongoose.Promise = bluebird;
 mongoose.connect('mongodb://kristine:starthouston!@ds137730.mlab.com:37730/skylinebars');
 
 const Schema = mongoose.Schema;
@@ -49,17 +51,26 @@ app.use(session({
 // var client = new pg.Client(connectionString);
 // client.connect();
 
+app.get("/login",function(req,res){
+        res.render('login')
+});
+
+
 app.post("/login",function(req,res){
     var password = req.body.password;
     User.findOne({email: req.body.email})
         .then(function (result) {
             if (result.password == password) {
                 console.log("Login Authenticated");
+                console.log(result);
+                req.session.email = result.email;
                 res.send({"login":true});
-                res.render('/profile');
+                // res.send({"id": result.id});
+                // res.render('/profile');
             } else  {
                 console.log("Authentication Failed");}
                 res.send({"login":false});
+                res.render('login')
             });
         });
 
@@ -79,21 +90,67 @@ app.post("/signup", function(req, res) {
         password: req.body.password
     });
     new_User.save()
-    return res.render('profile', {session: req.session});
+    return res.render('profile');
 })
 
 
 // TO DO search for the user and any changes made you can save
-    app.get("/profile", function(req, res) {
-    // const new_User = update User ({
-    //     fName: req.body.fname,
-    //     email: req.body.email,
-    //     password: req.body.password
-    // });
-    //
-    // User.save()
-    return res.render('profile', {session: req.session});
+//     app.post("/portfol", function(req, res) {
+//     const new_User = update User ({
+//         fName: req.body.fname,
+//         email: req.body.email,
+//         password: req.body.password
+//     });
+//
+//     User.save()
+//     return res.render('profile');
+// })
+app.get("/profile",function(req,res){
+    // print req.session.id
+    //do a db findOne, get user, pass to page
+    console.log(req.session);
+    User.findOne({email: req.session.email})
+    .then((result) => {
+        // print "result is "
+        // print result
+        console.log(result)
+        res.render('profile', {user: result});
+    });
+
+    //res.render will go in the then of the findOne
+
 })
+
+app.post("/profile", function(req, res) {
+    User.findOne({_id: req.session.id})
+        .then((userUpdate) => {
+                if (userUpdate) {
+                    if (req.body.fname &&
+                        req.body.fname != userUpdate.fname &&
+                        req.body.fname.length > 0) {
+                        userUpdate.fname = req.body.fname;
+                    }
+                    if (req.body.email &&
+                        req.body.email != userUpdate.email &&
+                        req.body.email.length >= 5) {
+                        userUpdate.email = req.body.email;
+                    }
+                    if (req.body.password &&
+                        req.body.password.length) {
+                        userUpdate.password = req.body.password
+                    }
+                    if (req.body.location &&
+                        req.body.location != userUpdate.location &&
+                        req.body.fname.length > 0) {
+                        userUpdate.location = req.body.location
+                    }
+                       userUpdate.save()
+                   }
+        });
+        return res.render('profile', {session: req.session
+        })
+})
+
 
 app.get("/favicon.ico",function(req,res){
     res.send("");

@@ -4,6 +4,7 @@ import SearchBar from "./SearchBar";
 import ResultList from "./ResultList";
 import {connect} from "react-redux";
 import Header from "./Header";
+import Profile from "./Profile";
 // import styled from 'styled-components';
 import axios from 'axios';
 
@@ -123,12 +124,6 @@ export default class SkyLineMain extends React.Component {
                    });
 
                });
-                this.setState({
-                    posts: venues,
-                    details: venueDetails
-                    // address: placeAddress,
-                    // phone: placePhone
-                })
             }
 
 

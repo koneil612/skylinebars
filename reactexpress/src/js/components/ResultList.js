@@ -10,7 +10,7 @@ class Clicking extends React.Component {
 
     postVenue() {
             return
-            <p> {this.props.placeAddress} what have you </p>;
+            <p> {this.props.placeAddress} </p>;
     }
 
     handleClick(e) {
