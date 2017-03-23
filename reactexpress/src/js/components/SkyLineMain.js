@@ -43,7 +43,7 @@ export default class SkyLineMain extends React.Component {
           .then(res => {
             if(res.data.login){
                 console.log("logging in user");
-                this.setState({isLoggedIn: true, page:"signin"});
+                window.location = "/profile";
             }
           });
     }

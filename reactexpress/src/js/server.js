@@ -26,9 +26,10 @@ const Schema = mongoose.Schema;
 
 // Define the user schema'
 const userSchema = new Schema({
-    fName: { type: String, required: true },
+    fname: { type: String, required: true },
     email: {type: String, required: true, unique: true },
     password: { type: String, required: true },
+    location: {type: Array}
     });
 
 // Create a User model with defined schema
@@ -70,14 +71,13 @@ app.post("/login",function(req,res){
             } else  {
                 console.log("Authentication Failed");}
                 res.send({"login":false});
-                res.render('login')
             });
         });
 
 app.get("/signup",function(req,res){
     if (req.session.token) {
         console.log('signed in');
-        res.redirect('profile');
+        res.render('profile');
     } else {
         res.render('signup', {session: req.session});
     }
@@ -85,12 +85,12 @@ app.get("/signup",function(req,res){
 
 app.post("/signup", function(req, res) {
     const new_User = new User ({
-        fName: req.body.fname,
+        fname: req.body.fname,
         email: req.body.email,
         password: req.body.password
     });
     new_User.save()
-    return res.render('profile');
+    return res.render('index');
 })
 
 
@@ -122,13 +122,13 @@ app.get("/profile",function(req,res){
 })
 
 app.post("/profile", function(req, res) {
-    User.findOne({_id: req.session.id})
+    User.findOne({email: req.session.email})
         .then((userUpdate) => {
                 if (userUpdate) {
-                    if (req.body.fname &&
-                        req.body.fname != userUpdate.fname &&
-                        req.body.fname.length > 0) {
-                        userUpdate.fname = req.body.fname;
+                    if (req.body.firstname &&
+                        req.body.firstname != userUpdate.fname &&
+                        req.body.firstname.length > 0) {
+                        userUpdate.fname = req.body.firstname;
                     }
                     if (req.body.email &&
                         req.body.email != userUpdate.email &&
@@ -139,11 +139,6 @@ app.post("/profile", function(req, res) {
                         req.body.password.length) {
                         userUpdate.password = req.body.password
                     }
-                    if (req.body.location &&
-                        req.body.location != userUpdate.location &&
-                        req.body.fname.length > 0) {
-                        userUpdate.location = req.body.location
-                    }
                        userUpdate.save()
                    }
         });
@@ -151,6 +146,16 @@ app.post("/profile", function(req, res) {
         })
 })
 
+app.post("/location", function(req,res) {
+    User.findOne({email: req.session.email})
+        .then((User) => {
+            User.location.push(
+                req.body.location
+        );
+        User.save()
+        res.render('profile');
+    });
+})
 
 app.get("/favicon.ico",function(req,res){
     res.send("");

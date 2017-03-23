@@ -75,17 +75,21 @@ body {
     font-size: 20px;
 }
 
+#results {
+    z-index: 1;
+}
 
 li {
-  padding: 10px;
-  background-color: lightgrey;
-  font-size: 1.5em;
-  color: black;
-  font-family: "Sunn";
-  text-align: center;
-  list-style: none;
-  opacity: .5;
-  font-weight: bolder;
+    z-index: 0;
+    padding: 10px;
+    background-color: lightgrey;
+    font-size: 1.5em;
+    color: black;
+    font-family: "Sunn";
+    text-align: center;
+    list-style: none;
+    /*opacity: .5;*/
+    font-weight: bolder;
   /*text-shadow: -1px 0 black;*/
   /*line-height: 20px;*/
   /*border-radius: 10%;*/
