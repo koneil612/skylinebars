@@ -13,7 +13,7 @@ body {
     height: 100%;
     text-align: center;
     margin: auto;
-    color: tomato;
+    /*color: tomato;*/
     background: fixed;
     background-image: url(/img/Citybw.jpg);
     background-size: cover;
@@ -34,30 +34,37 @@ body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
-/*#searcharea {
-    background-color: papayawhip;
-    border-color: grey;
-    color: black;
-    opacity: .5;
-}*/
+#signupheader {
+    color: #C0C0C0;
+    text-align: center;
+    font-family: Gist;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+}
+
+
 #map {
     height: 400px;
     width: 80%;
     /*border-radius: 10%;*/
     border: lightgrey solid;
 }
-
+#buttons {
+    border: black solid;
+    color: tomato;
+}
 #signup {
     display: inline-block;
+    color: tomato;
     text-align: center;
     /*object-position: center;*/
-    width: 100%;
+    /*width: 100%;*/
     font-size: 20px;
     margin-top: 2em;
     padding: 30px;
     max-width: 60%;
     background-color: lightgrey;
-    opacity: .9;
+    /*opacity: .9;*/
+    border-radius: 30%;
 }
 
 #signupform {

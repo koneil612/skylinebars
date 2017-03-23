@@ -15,14 +15,13 @@ class Clicking extends React.Component {
 
     handleClick(e) {
         // const clickName = this.props.post.name;
-            // return <p>{this.props.post.location.address} </p>
+            return <p>{this.props.venuedeets.location.address} </p>
         console.log("Clicked an li", this);
 
 
     }
 
     render() {
-        console.log("rendering a list item");
         // console.log("venue photos " + this.props.details.venue.photos.groups.items.prefix + this.props.details.venue.photos.groups.items.suffix.);
         // var imgUrl =this.props.detail.photos.groups.items.prefix + this.props.detail.photos.groups.items.suffix;
         // console.log(imgUrl);
@@ -31,7 +30,6 @@ class Clicking extends React.Component {
             <div>
             <p onClick={this.handleClick}>
             {this.props.post.name}</p>
-
             </div>
         );
     }
@@ -39,8 +37,6 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        console.log("Props");
-        console.log(this.props);
         console.log("this is venuedeets ");
         console.log(this.props.venuedeets);
         console.log('rendering resultlist');

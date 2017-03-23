@@ -1,15 +1,27 @@
-    <link rel="stylesheet" href="/css/style.css">
+<link href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.6/cosmo/bootstrap.min.css" type="text/css" rel="stylesheet" />
+<link rel="stylesheet" href="/css/style.css">
 
 
-<div>
-    <h1>{{fname}} Profile</h1>
-    <form method="POST">
-     <div class="signup">
-        <p><input type="text" id="fname" name="fname" placeholder={{fname}}/></p>
-        <p><input placeholder="{{email}}" type="text" id="email" name="email"/></p>
-        <p><input placeholder="Password" type="password" id="password" name="password"/></p>
-        <p><input placeholder="Confirm Password" type="text" id="confirm"/></p>
-    <button id="send"> Update Profile</button>
-    </div>
-    </form>
-</div>
+    <div class="container-fluid main-body">
+        <div className="row">
+            <div className="col-md-12">
+                <div id="signup">
+                    <h1>{{fname}} Profile</h1>
+                    <form method="POST">
+                     <div class="signup">
+                        <h1 id="signupheader">Update Account Information</h1>
+                        <p><input type="text" id="fname" name="fname" placeholder={{fname}}/></p>
+                        <p><input placeholder="{{email}}" type="text" id="email" name="email"/></p>
+                        <p><input placeholder="Password" type="password" id="password" name="password"/></p>
+                        <p><input placeholder="Confirm Password" type="text" id="confirm"/></p>
+                    <button id="send"> Update Profile</button>
+                    </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div className="row">
+            <div className="col-md-12">
+                <h3> Enter Your Favorite City(ies):</h3>
+            </div>
+        </div>

@@ -58,69 +58,78 @@ export default class SkyLineMain extends React.Component {
         // <SignUp />
     }
     doSearch(search, event) {
-        console.log("search is ", search);
-        this.setState({
-            search: search,
-        });
+           //   console.log("search is ", search);
+           this.setState({
+               search: search,
+           });
+           var self = this;//use self inside axios to access the component object
+           // this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
+           axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
+               .then(res => {
+                   console.log(res);
+                   var venues = res.data.response.venues;
+                   // var venueId = res.data.response.venues.id;
+                   // var venueIds = [];
+                   // venueId = venueIds.push;
+                   console.log("should be ind ids: "+ venueIds);
+                   var venueIds = [];
+                   var venueDetails = [];
 
-        // this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
-        axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
-            .then(res => {
-                console.log(res);
-                var venues = res.data.response.venues;
-                // var venueId = res.data.response.venues.id;
-                // var venueIds = [];
-                // venueId = venueIds.push;
-                console.log("should be ind ids: "+ venueIds);
-                var venueIds = [];
-                var venueDetails = [];
+                   venues.map(function(item) {
+                       // console.log(item);
+                       venueIds.push(item.id);
 
-                venues.map(function(item) {
-                    // console.log(item);
-                    venueIds.push(item.id);
+                       axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
+                           .then(res2 => {
+                               venueDetails.push(res2.data.response.venue);
+                           // console.log(venueDetails);
+                           if(venueDetails.length==venues.length){
+                               //we got all the venueDetails, change the state to trigger the re-render
+                               self.setState({
+                                   posts: venues,
+                                   details: venueDetails
+                                   // address: placeAddress,
+                                   // phone: placePhone
+                               })
+                           }
+                           })
 
-                    // axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
-                    //     .then(res2 =>
-                    //         while (venueDetails.length < venues.length){
-                    //         venueDetails.push(res2.data.response.venue);
-                    //     // console.log(venueDetails);
-                    //     })
+       // make a count on the venues so when venue deails == venues count then it will be odne
 
-    // make a count on the venues so when venue deails == venues count then it will be odne
+                       //adding markers onto the map with :
+                       var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
 
-                    //adding markers onto the map with :
-                    var markerLocation = new google.maps.LatLng(item.location.lat, item.location.lng);
+                       var marker = new google.maps.Marker({
+                           position: markerLocation,
+                           title: item.name,
+                           map: window.map,
+                           venue: item
+                       });
+                       window.map.setCenter(markerLocation);
 
-                    var marker = new google.maps.Marker({
-                        position: markerLocation,
-                        title: item.name,
-                        map: window.map,
-                        venue: item
-                    });
-                    window.map.setCenter(markerLocation);
+                       // This event expects a click on a marker
+                       // When this event is fired the Info Window content is created
+                       // and the Info Window is opened.
+                       google.maps.event.addListener(marker, 'click', function() {
+                           var self = this;
+                           var placePhone = (self.venue.contact.formattedPhone === undefined) ? 'None' : self.venue.contact.formattedPhone;
+                           // console.log("clicked marker", self);
 
-                    // This event expects a click on a marker
-                    // When this event is fired the Info Window content is created
-                    // and the Info Window is opened.
-                    google.maps.event.addListener(marker, 'click', function() {
-                        var self = this;
-                        var placePhone = (self.venue.contact.formattedPhone === undefined) ? 'None' : self.venue.contact.formattedPhone;
-                        // console.log("clicked marker", self);
+                           // sets the on click content with info from the locations::
+                           window.infowindow.setContent('<div id="iw_container"><p><strong>Name: </strong>' + self.title + '</p>' +'<p><strong>Address: </strong>  ' +self.venue.location.address + '</p>'+'<p><strong>Phone: </strong>' + placePhone+ '</p></div>');
+                           infowindow.open(map, this);
+                       });
 
-                        // sets the on click content with info from the locations::
-                        window.infowindow.setContent('<div id="iw_container"><p><strong>Name: </strong>' + self.title + '</p>' +'<p><strong>Address: </strong>  ' +self.venue.location.address + '</p>'+'<p><strong>Phone: </strong>' + placePhone+ '</p></div>');
-                        infowindow.open(map, this);
-                    });
+                   });
 
-                });
+               });
                 this.setState({
                     posts: venues,
                     details: venueDetails
                     // address: placeAddress,
                     // phone: placePhone
                 })
-            });
-    }
+            }
 
 
     render() {
