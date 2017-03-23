@@ -44,18 +44,16 @@ export default class ResultList extends React.Component {
         console.log("this is venuedeets ");
         console.log(this.props.venuedeets);
         console.log('rendering resultlist');
-        var lis = this.props.venuedeets.map(
-            detail=>{
-            <li key={detail.id}>
-              <Clicking post={detail} />
-            </li>});
-        console.log(lis);
+
     return (
-        <div>
             <ul>
-                {lis}
+            {this.props.venuedeets.map(detail =>
+                <li key={detail.id}><Clicking post={detail} title={this.postVenue} />
+
+                </li>
+            )}
             </ul>
-          </div>
+
         )
   }
 }

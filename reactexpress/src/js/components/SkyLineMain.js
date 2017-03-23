@@ -52,14 +52,13 @@ export default class SkyLineMain extends React.Component {
     }
 
     doSignup(){
-        console.log("doingSignup");
+        // console.log("doingSignup");
         document.location='signup';
         // this.setState({page:"signup"});
         // <SignUp />
     }
-
     doSearch(search, event) {
-        //   console.log("search is ", search);
+        console.log("search is ", search);
         this.setState({
             search: search,
         });
@@ -80,11 +79,12 @@ export default class SkyLineMain extends React.Component {
                     // console.log(item);
                     venueIds.push(item.id);
 
-                    axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
-                        .then(res2 => {
-                            venueDetails.push(res2.data.response.venue);
-                        // console.log(venueDetails);
-                        })
+                    // axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
+                    //     .then(res2 =>
+                    //         while (venueDetails.length < venues.length){
+                    //         venueDetails.push(res2.data.response.venue);
+                    //     // console.log(venueDetails);
+                    //     })
 
     // make a count on the venues so when venue deails == venues count then it will be odne
 

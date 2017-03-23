@@ -13,6 +13,7 @@ body {
     height: 100%;
     text-align: center;
     margin: auto;
+    color: tomato;
     background: fixed;
     background-image: url(/img/Citybw.jpg);
     background-size: cover;
@@ -22,20 +23,11 @@ body {
     font-size: 2.5em;
 }
 
-/*#signup {
-    background-image: url(/img/Citybw.jpg);
-    background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
-    font-family: "Sunn";
-    font-size: 2.5em;
-}*/
-
-
 #header {
     width: 100%;
     height: 100%;
-    color: #ffd13b;
+    /*color: #ffd13b;*/
+    color: #C0C0C0;
     font-size: 2.5em;
     text-align: center;
     font-family: Gist;
@@ -55,14 +47,21 @@ body {
     border: lightgrey solid;
 }
 
-.signup {
+#signup {
+    display: inline-block;
     text-align: center;
+    /*object-position: center;*/
+    width: 100%;
     font-size: 20px;
+    margin-top: 2em;
     padding: 30px;
     max-width: 60%;
-    /*background-color: #53868b;*/
-    margin: 40px;
+    background-color: lightgrey;
+    opacity: .9;
+}
 
+#signupform {
+    opacity: 1;
 }
 
 #fname, #lname, #email, #password, #confirm {
@@ -102,7 +101,7 @@ li {
   	height: 100%;
   	/*transform: translateX(250px);*/
   	overflow-y: auto;
-  	background: transparent;
+  	/*background: transparent;*/
 
 }
 .sidebar-nav {
