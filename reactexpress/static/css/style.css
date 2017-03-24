@@ -22,7 +22,12 @@ body {
     font-family: Sunn;
     font-size: 2.5em;
 }
+#loginheader {
+    padding-top: 20px;
+    color: tomato;
+    text-align: right
 
+}
 #header {
     width: 100%;
     height: 100%;
@@ -34,11 +39,15 @@ body {
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
 
+#hr{
+    margin: 5;
+}
 #signupheader {
     color: #C0C0C0;
     text-align: center;
     font-family: Gist;
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    padding-bottom: 10px;
 }
 
 #middlerow {
@@ -48,8 +57,12 @@ body {
 #searcharea {
     z-index: 0;
     background-color: lightgrey;
-    opacity: .7;
+    opacity: .8;
     position: relative;
+}
+
+#weather {
+    display: inline-block;
 }
 
 #results {
@@ -73,13 +86,12 @@ body {
     text-decoration: underline;
     color: tomato;
 }
-#otherinfo:before {
-    display: none;
+#otherinfo {
+    font-size: 1em;
+    font-weight: lighter;
 }
 
-#otherinfo:after {
-    display: inline;
-}
+
 
 ul {
     padding: 0;
@@ -90,30 +102,32 @@ ul {
     height: 500px;
     border: lightgrey solid;
 }
-#buttons {
+#button{
     border: black solid;
     color: tomato;
+    border: 0;
+    border-right: 2px;
 }
 #signup {
+
+margin-top: 10%;
     display: inline-block;
     color: tomato;
     text-align: center;
     /*object-position: center;*/
     /*width: 100%;*/
-    font-size: 20px;
-    margin-top: 2em;
+    font-size: 30px;
+    /*margin-top: 2em;*/
     padding: 30px;
-    max-width: 60%;
+    /*max-width: 60%;*/
     border-radius: 30%;
     background-color: lightgrey;
 }
 
-#signupform {
-    opacity: 1;
-}
-
 #fname, #lname, #email, #password, #confirm {
-    font-size: 1em;
+    font-size: 20px;
+    max-height: 20px;
+    padding: 2px;
 }
 
 

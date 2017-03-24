@@ -72,14 +72,14 @@ export default class SkyLineMain extends React.Component {
                    // var venueId = res.data.response.venues.id;
                    // var venueIds = [];
                    // venueId = venueIds.push;
-                   console.log("should be ind ids: "+ venueIds);
                    var venueIds = [];
                    var venueDetails = [];
-
+                  //    console.log(res.data.response.venues.location.lat[0]);
                    venues.map(function(item) {
-                       // console.log(item);
+                       if (venueIds.length == 0) {
+                           getWeather(item.location.lat, item.location.lng)
+                       }
                        venueIds.push(item.id);
-
                        axios.get('https://api.foursquare.com/v2/venues/' + item.id +'?&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
                            .then(res2 => {
                                venueDetails.push(res2.data.response.venue);
@@ -89,8 +89,7 @@ export default class SkyLineMain extends React.Component {
                                self.setState({
                                    posts: venues,
                                    details: venueDetails
-                                   // address: placeAddress,
-                                   // phone: placePhone
+
                                })
                            }
                            })
@@ -121,9 +120,17 @@ export default class SkyLineMain extends React.Component {
                            infowindow.open(map, this);
                        });
 
+                       //  weather api
+                    //    console.log("this is the LAT phone");
+                    //    console.log(venue);
+                    //    console.log("this is the LANG HOPEFULLY");
+                    //    console.log(item.location.lng);
+
                    });
 
                });
+
+
             }
 
 
@@ -133,13 +140,11 @@ export default class SkyLineMain extends React.Component {
         let venuedeets = <li> {}</li>;
 
         let doSignup = null
-        // let page = this.state.page;
-        // console.log("page is "+page);
+
         return (
             <div class="container-fluid main-body">
-
             <Header isLoggedIn={this.state.isLoggedIn} doLogin={this.doLogin} doLogout={this.doLogout} doSignup={this.doSignup}/>
-             <br/> <hr/>
+             <hr id="hr"/>
              <div class = "mainbod">
              <div id="header">SkyLine Bars</div>
              </div>
@@ -147,7 +152,9 @@ export default class SkyLineMain extends React.Component {
                  <div className="col-md-12">
                          <div>
                             <SearchBar doSearch = {this.doSearch}/>
+                            <span id="weather"><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:94114.1.99999&bannertypeclick=wu_simplegray" title="{citySearch}" target="_blank"><img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_simplegray&airportcode=KSFO&ForcedCity=San Francisco&ForcedState=CA&zip=94114&language=EN" alt="Find more about Weather in San Francisco, CA" width="160" /></a><br /><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:94114.1.99999&bannertypeclick=wu_simplegray" title="Get latest Weather Forecast updates" target="_blank">Click for weather forecast</a></span>
                          </div>
+
                 </div>
             </div>
             <div className="row" id="middlerow">
@@ -177,7 +184,7 @@ function SignUp() {
                 <p><input placeholder="Email" type="text" id="email"/> </p>
                 <p><input placeholder="Password" type="password" id="password"/></p>
                 <p><input placeholder="Confirm Password" type="text" id="confirm"/></p>
-            <button id="send" onClick={this.doSignup}> Sign Up</button>
+            <button id="send button" onClick={this.doSignup}> Sign Up</button>
             </div>
             </form>
         </div>
@@ -192,7 +199,7 @@ function SignIn(props) {
              <div id="signin">
                 <input placeholder="Email" type="text" id="email"/>
                 <input placeholder="Password" type="password" id="password"/>
-            <button id="send"> Send</button>
+            <button id="send button"> Send</button>
             </div>
             </form>
         </div>

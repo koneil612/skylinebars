@@ -3,6 +3,8 @@ import React from "react";
 class Clicking extends React.Component {
     constructor() {
         super();
+        this.state = {showDetails: false};
+
         this.handleClick = this.handleClick.bind(this);
         this.postVenue = this.postVenue.bind(this);
 
@@ -15,18 +17,18 @@ class Clicking extends React.Component {
 
     handleClick(e) {
         console.log("Clicked an li");
-            if (this.props.location !== undefined ){
+            if (this.props.post.location !== undefined ){
                 var address = this.props.post.location.address
             }
 
-            if (this.props.description){
+            if (this.props.post.description){
                 var desc = this.props.post.description
             }
 
 
             console.log("I clicked a li that is:");
             console.log(desc);
-        return
+            this.setState({showDetails:true});
         }
         // const clickName = this.props.post.name;
 
@@ -41,8 +43,9 @@ class Clicking extends React.Component {
                 var imgUrl = placePrefix +height + "x" + width + placeSuffix;
             }
         }
-
-        if (this.props.hours){
+        console.log("hours");
+        console.log(this.props.post);
+        if (this.props.post.hours){
             var hourStatus = this.props.post.hours.status;
         }
 
@@ -50,15 +53,19 @@ class Clicking extends React.Component {
 
  // <p id="resultinfo">{this.props.post.description} </p>
         var icon = <img src={imgUrl} id="photos"/>;
-
+        var details = <div></div>;
+        if(this.state.showDetails){
+            details = <div><p>{hourStatus}</p>
+            <p id="otherinfo">{this.props.post.description}</p>
+            <p id="otherinfo">{this.props.post.location.address}</p></div>
+        }
         return (
             <div id="results"> {icon}
             <p id="name" onClick={this.handleClick}>
             {this.props.post.name}</p>
-            <p id="otherinfo">{this.props.post.description}</p>
-            <p id="otherinfo">{this.props.post.location.address}</p>
-            <p id="otherinfo">{hourStatus}</p>
+            {details}
             </div>
+
         );
     }
 }
@@ -72,8 +79,8 @@ export default class ResultList extends React.Component {
     return (
 
             <ul>
-            {this.props.venuedeets.map(detail =>
-                <li key={detail.id}><Clicking post={detail} title={this.postVenue} />
+            {this.props.venuedeets.map(venue =>
+                <li key={venue.id}><Clicking post={venue} title={this.postVenue} />
 
                 </li>
             )}

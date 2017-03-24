@@ -26,7 +26,7 @@ export default class SearchBar extends React.Component {
             <input placeholder="Houston, TX" type="text" value={this.state.value} onChange={this.handleChange}
             />
           </label>
-          <input type="submit" value="Submit" onClick={this.props.doSearch.bind(null,this.state.value)}/>
+          <input id="button" type="submit" value="Submit" onClick={this.props.doSearch.bind(null,this.state.value)}/>
           <br/><br/>
         </form>
 

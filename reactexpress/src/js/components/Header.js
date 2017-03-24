@@ -5,19 +5,19 @@ function SignUpButton(props) {
     console.log("signup props");
     console.log(props);
     return (
-        <button onClick={props.onClick}>Sign Up!</button>
+        <button id="button" onClick={props.onClick}>Sign Up!</button>
     );
 }
 
 function LoginButton(props) {
     return (
-        <button onClick={props.onClick}>Login</button>
+        <button id="button" onClick={props.onClick}>Login</button>
     );
 }
 
 function LogoutButton(props) {
     return (
-        <button onClick={props.onClick}>Logout</button>
+        <button id="button" onClick={props.onClick}>Logout</button>
     );
 }
 
@@ -49,6 +49,8 @@ class Header extends React.Component {
         this.handleLoginClick = this.handleLoginClick.bind(this);
         this.handleLogoutClick = this.handleLogoutClick.bind(this);
         this.handleSignUpClick = this.handleSignUpClick.bind(this);
+        this.handlePasswordChange= this.handlePasswordChange.bind(this);
+        this.handleEmailChange = this.handleEmailChange.bind(this);
     }
 
     handleLoginClick(event) {
@@ -67,11 +69,24 @@ class Header extends React.Component {
         this.props.doSignup();
     }
 
+    handleEmailChange(event) {
+     this.setState({email: event.target.value});
+   }
+
+   handlePasswordChange(event) {
+     this.setState({password: event.target.value});
+   }
+
+
   render() {
       const isLoggedIn = this.props.isLoggedIn;
       let button = null;
+      let inputEmail = null;
+      let inputPassword = null;
       let signupbutton = null;
       let loginbutton = null;
+
+
       if (isLoggedIn) {
           button = <LogoutButton onClick={this.handleLogoutClick} />;
       } else {
@@ -83,14 +98,13 @@ class Header extends React.Component {
 
     return (
       <div id="loginheader">
-        <Greeting isLoggedIn={this.props.isLoggedIn} />
         {button}
         <form>
-         <div className="signin">
-            <input placeholder="Email" type="text" id="email" value={this.state.email} />
-            <input placeholder="Password" type="password" id="password" value={this.state.password} />
-        </div>
         {loginbutton} {signupbutton}
+        <div className="signin">
+         <input placeholder="Email" type="text" id="email" value={this.state.email} onChange={this.handleEmailChange}/>
+        <input placeholder="Password" type="password" id="password" value={this.state.password} onChange={this.handlePasswordChange}/>
+        </div>
         </form>
       </div>
 

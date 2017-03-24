@@ -28,7 +28,6 @@
           </li>
       </ul>
 </nav> -->
-
       <div id="app"></div>
 
       <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyDOvCtHvQNlUnFWqKrxwiVKqFVA8t5iVHQ&callback=initMap&libraries=geometry,places">
@@ -40,6 +39,9 @@
       $("document").ready(function() {
           console.log("ready?!?!");
       });
+
+
+
 
       function initMap() {
           window.map = new google.maps.Map(document.getElementById('map'), {
@@ -62,7 +64,9 @@
 
                   //infoWindow.setContent('Location found.');
                   map.setCenter(pos);
+                  console.log("centering map");
 
+                  getWeather(pos.lat,pos.lng);
 
               }, function() {
                   handleLocationError(true, infoWindow, window.map.getCenter());
@@ -78,6 +82,31 @@
           infoWindow.setContent(browserHasGeolocation ?
               'Error: The Geolocation service failed.' :
               'Error: Your browser doesn\'t support geolocation.');
+      }
+
+      function getWeather(lat,lng){
+          $.ajax({
+              url : "http://api.wunderground.com/api/31992b97a38f51fc/geolookup/q/"+ lat +"," + lng +".json",
+              dataType : "jsonp",
+              success : function(parsed_json) {
+                  console.log(parsed_json);
+                var city = parsed_json.location.city;
+                var state = parsed_json.location.state;
+                var url = "http://api.wunderground.com/api/31992b97a38f51fc/conditions/q/"+state+"/"+city+".json";
+
+                $.ajax({
+                    url : url,
+                    dataType : "jsonp",
+                    success : function(parsed_json) {
+                        var temp_f = parsed_json['current_observation']['temp_f'];
+                        alert("Current temperature in " + city + " is: " + temp_f);
+                        // console.log("parsed_json");
+                        // console.log(parsed_json);
+                    }
+                });
+
+          }
+      });
       }
   </script>
 

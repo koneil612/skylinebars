@@ -53,7 +53,7 @@ app.use(session({
 // client.connect();
 
 app.get("/login",function(req,res){
-        res.render('login')
+        res.render('signup')
 });
 
 
