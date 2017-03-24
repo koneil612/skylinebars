@@ -15,7 +15,6 @@ class Clicking extends React.Component {
 
     handleClick(e) {
         console.log("Clicked an li");
-        return
             if (this.props.location !== undefined ){
                 var address = this.props.post.location.address
             }
@@ -24,11 +23,10 @@ class Clicking extends React.Component {
                 var desc = this.props.post.description
             }
 
-            if (this.props.hours){
-                var hours = this.props.post.hours.status
-            }
 
-             console.log(desc);
+            console.log("I clicked a li that is:");
+            console.log(desc);
+        return
         }
         // const clickName = this.props.post.name;
 
@@ -44,16 +42,22 @@ class Clicking extends React.Component {
             }
         }
 
+        if (this.props.hours){
+            var hourStatus = this.props.post.hours.status;
+        }
+
 
 
  // <p id="resultinfo">{this.props.post.description} </p>
+        var icon = <img src={imgUrl} id="photos"/>;
 
-        var icon = <img src={imgUrl} />;
         return (
             <div id="results"> {icon}
-            <p onClick={this.handleClick}>
+            <p id="name" onClick={this.handleClick}>
             {this.props.post.name}</p>
-
+            <p id="otherinfo">{this.props.post.description}</p>
+            <p id="otherinfo">{this.props.post.location.address}</p>
+            <p id="otherinfo">{hourStatus}</p>
             </div>
         );
     }
@@ -66,6 +70,7 @@ export default class ResultList extends React.Component {
         console.log('rendering resultlist');
 
     return (
+
             <ul>
             {this.props.venuedeets.map(detail =>
                 <li key={detail.id}><Clicking post={detail} title={this.postVenue} />
@@ -73,7 +78,6 @@ export default class ResultList extends React.Component {
                 </li>
             )}
             </ul>
-
         )
   }
 }

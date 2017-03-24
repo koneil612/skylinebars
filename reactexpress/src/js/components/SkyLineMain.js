@@ -150,7 +150,7 @@ export default class SkyLineMain extends React.Component {
                          </div>
                 </div>
             </div>
-            <div className="row">
+            <div className="row" id="middlerow">
             <div className="col-md-6">
                 <div id="map"></div>
             </div>
