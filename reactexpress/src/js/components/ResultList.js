@@ -78,7 +78,7 @@ export default class ResultList extends React.Component {
 
     return (
 
-            <ul>
+            <ul id="searchresults">
             {this.props.venuedeets.map(venue =>
                 <li key={venue.id}><Clicking post={venue} title={this.postVenue} />
 

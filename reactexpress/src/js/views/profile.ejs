@@ -16,10 +16,10 @@
                     <form method="POST">
                      <div class="signup">
                         <h1 id="signupheader">Update Account Information</h1>
-                        <p><input value="<%- user.fname -%>" type="text" readonly>
+                        <p><input id="profile" value="<%- user.fname -%>" type="text" readonly>
                         <input placeholder="Update Name" type="text" id="fname" name="fname"></p>
-                        <p><input value="<%- user.email -%>" type="text" readonly><input placeholder="Update Email" type="text" id="email" name="email"></p>
-                        <p><input value="<%- user.password -%>" type="password" id="password" name="password"><input placeholder="Update Password" type="text" id="password" name="password"></p>
+                        <p><input id="profile" value="<%- user.email -%>" type="text" readonly><input placeholder="Update Email" type="text" id="email" name="email"></p>
+                        <p><input id="profile" value="<%- user.password -%>" type="password" id="password" name="password"><input placeholder="Update Password" type="text" id="password" name="password"></p>
                     <button id="send"> Update Profile</button>
                     </div>
                     </form>
@@ -27,16 +27,19 @@
             </div>
         </div>
         <div className="row">
-            <div className="col-md-12">
+            <div className="col-md-12" id="lower">
                 <div id="signup">
-                <h3> Enter Your Favorite City(ies):</h3>
+                <h3 id="signupheader"> Enter Your Favorite City:</h3>
+                <ul id="locationlist">
+                    <% for (var i=0; i<user.location.length; i++) { %>
+                        <li><%= user.location[i] %></li>
+                    <% } %>
+                </ul>
                 <form action="/location" method="POST">
-                    <input value="<%- user.location -%>" type="text" readonly>
                     <p>
                         <input placeholder="Location" type="text" id="location" name="location"/></p>
                     </p>
                     <input type="submit" id="save">
-
                 </form>
             </div>
         </div>
