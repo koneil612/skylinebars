@@ -72,9 +72,9 @@ class Clicking extends React.Component {
 
 export default class ResultList extends React.Component {
     render() {
-        console.log("this is venuedeets ");
-        console.log(this.props.venuedeets);
-        console.log('rendering resultlist');
+        // console.log("this is venuedeets ");
+        // console.log(this.props.venuedeets);
+        // console.log('rendering resultlist');
 
     return (
 

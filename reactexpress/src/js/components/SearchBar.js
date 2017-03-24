@@ -27,9 +27,9 @@ export default class SearchBar extends React.Component {
             />
           </label>
           <input id="button" type="submit" value="Submit" onClick={this.props.doSearch.bind(null,this.state.value)}/>
-          <br/><br/>
-        </form>
 
+        </form>
+        
     );
   }
 }

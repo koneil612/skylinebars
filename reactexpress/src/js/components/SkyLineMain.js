@@ -152,7 +152,8 @@ export default class SkyLineMain extends React.Component {
                  <div className="col-md-12">
                          <div>
                             <SearchBar doSearch = {this.doSearch}/>
-                            <span id="weather"><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:94114.1.99999&bannertypeclick=wu_simplegray" title="{citySearch}" target="_blank"><img src="http://weathersticker.wunderground.com/weathersticker/cgi-bin/banner/ban/wxBanner?bannertype=wu_simplegray&airportcode=KSFO&ForcedCity=San Francisco&ForcedState=CA&zip=94114&language=EN" alt="Find more about Weather in San Francisco, CA" width="160" /></a><br /><a href="http://www.wunderground.com/cgi-bin/findweather/getForecast?query=zmw:94114.1.99999&bannertypeclick=wu_simplegray" title="Get latest Weather Forecast updates" target="_blank">Click for weather forecast</a></span>
+                            <span id="weather">
+                            </span>
                          </div>
 
                 </div>

@@ -92,16 +92,18 @@
                   console.log(parsed_json);
                 var city = parsed_json.location.city;
                 var state = parsed_json.location.state;
-                var url = "http://api.wunderground.com/api/31992b97a38f51fc/conditions/q/"+state+"/"+city+".json";
+                var url = "http://api.wunderground.com/api/31992b97a38f51fc/forecast/q/"+state+"/"+city+".json";
 
                 $.ajax({
                     url : url,
                     dataType : "jsonp",
                     success : function(parsed_json) {
-                        var temp_f = parsed_json['current_observation']['temp_f'];
-                        alert("Current temperature in " + city + " is: " + temp_f);
+                        var Forecast = parsed_json['forecast']['txt_forecast']['forecastday'][0]['fcttext'];
+                        console.log(Forecast);
+                        // var temp_f = parsed_json['current_observation']['temp_f'];
+                        $("#weather").html(Forecast);
                         // console.log("parsed_json");
-                        // console.log(parsed_json);
+                        console.log(parsed_json);
                     }
                 });
 
