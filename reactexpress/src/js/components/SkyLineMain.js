@@ -35,14 +35,14 @@ export default class SkyLineMain extends React.Component {
         this.doSignup = this.doSignup.bind(this);
     }
     doLogin(email,password){
-        console.log("doLogin");
+        // console.log("doLogin");
         axios.post(`/login`, {
         email: email,
         password: password
         })
           .then(res => {
             if(res.data.login){
-                console.log("logging in user");
+                // console.log("logging in user");
                 window.location = "/profile";
             }
           });
@@ -67,7 +67,7 @@ export default class SkyLineMain extends React.Component {
            // this is searching foursquare for roofdeck and bars allowing to search with the search bar for the location
            axios.get('https://api.foursquare.com/v2/venues/search?near=' + search + '&query=Roof%20Deck%2Bbar&oauth_token=TRVTWDKGQ3PL1EFYGMKR5GNEPXLFZNOSBA5TAROXSTA4VGZP&v=20170313')
                .then(res => {
-                   console.log(res);
+                //    console.log(res);
                    var venues = res.data.response.venues;
                    // var venueId = res.data.response.venues.id;
                    // var venueIds = [];
