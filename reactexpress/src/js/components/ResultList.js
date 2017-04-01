@@ -16,7 +16,7 @@ class Clicking extends React.Component {
     }
 
     handleClick(e) {
-        console.log("Clicked an li");
+        // console.log("Clicked an li");
             if (this.props.post.location !== undefined ){
                 var address = this.props.post.location.address
             }
@@ -26,8 +26,8 @@ class Clicking extends React.Component {
             }
 
 
-            console.log("I clicked a li that is:");
-            console.log(desc);
+            // console.log("I clicked a li that is:");
+            // console.log(desc);
             this.setState({showDetails:true});
         }
         // const clickName = this.props.post.name;
@@ -43,8 +43,8 @@ class Clicking extends React.Component {
                 var imgUrl = placePrefix +height + "x" + width + placeSuffix;
             }
         }
-        console.log("hours");
-        console.log(this.props.post);
+        // console.log("hours");
+        // console.log(this.props.post);
         if (this.props.post.hours){
             var hourStatus = this.props.post.hours.status;
         }
